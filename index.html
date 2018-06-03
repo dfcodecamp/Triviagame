@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>tRIVIA App</title>
+  </head>
+  <body>
+
+    <h1>Open the console to see the magic!</h1>
+    
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+   
+<div id="buttons">
+    <button id="start">Start</button>
+    <button id="reset">Reset</button>
+   
+
+</div>
+   
+<div id="TMR">00:00</div>
+
+<div id="Questions">
+    
+    
+   
+    <form id="Quiz" action="/subQuiz" method="GET">
+       
+        <p></p>
+        Electric current is measured using what device?:<br>
+        <input type="radio" name="question" value="0" checked> Ammeter <br>
+        <input type="radio" name="question" value="1"> Volt Meter<br>
+        <input type="radio" name="question" value="2"> House Meter  
+        <p></p>
+        In terms of electricity, what does DC stand for?:<br>
+        <input type="radio" name="question1" value="0" checked> Direct Drive <br>
+        <input type="radio" name="question1" value="1"> Alternating Currect<br>
+        <input type="radio" name="question1" value="2"> Direct Current 
+        <p></p>
+        The wire inside an electric bulb is known as the what?:<br>
+        <input type="radio" name="question2" value="0" checked> Sacrificial Wire <br>
+        <input type="radio" name="question2" value="1"> Light Wire<br>
+        <input type="radio" name="question2" value="2"> Filament 
+        <p></p>
+        Electric current is measured using what device?:<br>
+        <input type="radio" name="question3" value="0" checked> Watts <br>
+        <input type="radio" name="question3" value="1"> Ohms<br>
+        <input type="radio" name="question3" value="2"> Amps 
+        <p></p>
+        <input id="submit" type="submit" value="submit" />
+        
+     
+    
+    </form> 
+
+
+</div>
+
+   
+   
+<script type="text/javascript">
+
+// This code will run as soon as the page loads
+
+
+window.onload = function() {
+
+$("#reset").on("click", timerClock.reset);
+$("#start").on("click", timerClock.start);
+  
+};
+
+let intervalId;
+let clockRunning = false;
+
+let timerClock = {
+                 time: 0,
+            reset: function() {
+
+            timerClock.time = 0;
+
+            // DONE: Change the "display" div to "00:00."
+            $("#TMR").text("00:00");
+         
+},
+                start: function() {
+// DONE: Use setInterval to start the count here and set the clock to running.
+                if (!clockRunning)  {
+  intervalId = setInterval(timerClock.count, 1000);
+  clockRunning = true;
+                                    }
+                                  },
+
+                stop: function() {
+
+// DONE: Use clearInterval to stop the count here and set the clock to not be running.
+clearInterval(intervalId);
+clockRunning = false;      
+                                },
+                 count: function() {
+
+// DONE: increment time by 1, remember we cant use "this" here.
+timerClock.time++;
+
+// DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+//       and save the result in a variable.
+var converted = timerClock.timeConverter(timerClock.time);
+console.log(converted);
+
+// DONE: Use the variable we just created to show the converted time in the "display" div.
+$("#TMR").text(converted);
+},
+                    
+timeConverter: function(t) {
+
+var minutes = Math.floor(t / 60);
+var seconds = t - (minutes * 60);
+
+if (seconds < 10) {
+  seconds = "0" + seconds;
+}
+
+if (minutes === 0) {
+  minutes = "00";
+}
+else if (minutes < 10) {
+  minutes = "0" + minutes;
+}
+
+return minutes + ":" + seconds;
+}
+                };                   
+                    
+                    
+                 
+                 
+
+
+var TriviaQuestions = 
+        [
+            {
+            question: "Electric current is measured using what device?",
+            options:    ["Ammeter","Volt Meter" ,"House Meter"],
+            correctOption:0
+            },
+
+            {
+            question:   "In terms of electricity, what does DC stand for?",
+            options:    ["Direct Drive", "Alternating Currect","Direct Current"],
+            correctOption:2
+            },
+            
+            {
+            question:   "The wire inside an electric bulb is known as the what?",
+            options:    ["Sacrificial Wire","Light Wire","Filament"],
+            correctOption:2
+            },
+            
+            {
+            question:   "Electric power is typically measured in what units?",
+            options:    ["Watts","Ohms","Amps"],
+            correctOption:0
+            }
+            
+            
+            
+        ];
+
+/*
+(function() {
+
+    var form = document.getElementById('subQuiz');
+    addEvent (form, 'submit', function(e) {
+
+        e.preventDefault();
+        var elements = this.elements;
+
+    }
+
+
+}
+*/
+
+
+
+
+
+
+
+
+
+    </script>
+    
+  </body>
+</html>
